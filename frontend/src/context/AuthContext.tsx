@@ -38,10 +38,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // ── Bootstrap: restore an existing session on first paint (persistent login) ──
   useEffect(() => {
     const ac = new AbortController();
+    const timer = setTimeout(() => {
+      if (mounted.current && status === 'loading') {
+        setStatus('anonymous');
+      }
+    }, 3000);
 
     (async () => {
       try {
         const res = await fetchSession(ac.signal);
+        clearTimeout(timer);
         if (!mounted.current) return;
 
         if (isAuthError(res)) {
@@ -51,12 +57,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           setUser({ identifier: res.session.identifier, channel: res.session.channel });
           setStatus('authenticated');
         }
-      } catch {
-        // AbortError on unmount — nothing to do.
+      } catch (err: any) {
+        clearTimeout(timer);
+        if (err?.name === 'AbortError') return;
+        if (mounted.current) {
+          setUser(null);
+          setStatus('anonymous');
+        }
       }
     })();
 
-    return () => ac.abort();
+    return () => {
+      clearTimeout(timer);
+      ac.abort();
+    };
   }, []);
 
   // ── Silent refresh while authenticated ──
