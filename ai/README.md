@@ -12,7 +12,8 @@ This directory contains the AI/LLM models, prompt templates, triaging rules, and
 ## 🎯 Scope & Responsibilities
 1. **Multi-Provider Failover Pipeline**:
    - **Primary**: Google Gemini API (`gemini-3.1-flash-lite`) for high-throughput, structured JSON triaging.
-   - **Fallback 1**: AWS Bedrock (Claude Haiku) for heavy reasoning fallback.
+   - **Fallback Policy**: Gemini 3.1 Flash → AWS Bedrock (Claude) → Anthropic Claude Direct → Static Fallback.
+   - **Quota Monitoring**: Built-in sliding-window rate limiters and daily global caps.
    - **Fallback 2**: Anthropic Claude Direct API (`claude-haiku-4-5-20251001`).
    - **Fallback 3**: Static fallback response ladder ensuring 100% uptime.
 
