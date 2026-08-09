@@ -74,8 +74,8 @@ To allow seamless parallel Git commits without merge conflicts, the repository i
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/CIVI-AI-PRJ.git
-cd CIVI-AI-PRJ
+git clone https://github.com/prakshaljain1611-collab/CIVIC-AI---HackMatrix2026-.git
+cd CIVIC-AI---HackMatrix2026-
 ```
 
 ### 2. Install Dependencies
