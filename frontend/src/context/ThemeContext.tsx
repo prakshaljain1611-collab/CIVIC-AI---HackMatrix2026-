@@ -1,3 +1,7 @@
+/**
+ * Theme & Accessibility Context for CivicAI.
+ * Manages light/dark theme switching and WCAG AA contrast compliance.
+ */
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 type Theme = 'light' | 'dark';
