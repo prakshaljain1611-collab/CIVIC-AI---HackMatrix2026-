@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3000:3000"
+      - "8787:8787"
+    environment:
+      - PORT=8787
+      - NODE_ENV=production
+      - DATABASE_URL=postgres://civic:civicpass@postgres:5432/civicai
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: civic
+      POSTGRES_PASSWORD: civicpass
+      POSTGRES_DB: civicai
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ../database/001_schema.sql:/docker-entrypoint-initdb.d/001_schema.sql
+
+volumes:
+  pgdata:
