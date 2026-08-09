@@ -24,6 +24,9 @@ export const LOCALES = [
   { code: 'ur', native: 'اردو',        english: 'Urdu',      dir: 'rtl' },
 ] as const;
 
+/**
+ * Internationalization & Localization definitions for CivicAI (English & Hindi).
+ */
 export type LangType = (typeof LOCALES)[number]['code'];
 
 export const LANG_CODES = LOCALES.map(l => l.code) as readonly LangType[];
