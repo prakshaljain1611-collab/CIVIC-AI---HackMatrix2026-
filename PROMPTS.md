@@ -16,7 +16,8 @@ Rules:
 - Category MUST be one of: Road & Infrastructure, Water Supply, Electricity, Sanitation, Law & Order, Public Transport, Parks & Recreation, General.
 - "locationText" = the exact place the citizen named (street, sector, landmark, area). Empty string if none given.
 - Set "readyToFile" true only when you have BOTH a clear problem description AND a location.
-- "missingInfo" lists what you still need, e.g. ["location"] or ["description"].
+- Extract street names, sector numbers, and landmark coordinates automatically.
+- Format responses as structured JSON with category, priority, sentiment, and location fields.
 ```
 
 ---
