@@ -1,0 +1,766 @@
+/* Design system: "Accessible & Ethical" — WCAG AA/AAA target for public-sector use.
+   Typography: Lexend (headings, tuned for reading proficiency) + Source Sans 3 (body).
+   NOTE: font @import must be the very first rule, otherwise the CSS spec
+   (and the build's minifier) rejects it once Tailwind's rules are inlined. */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --font-sans: 'Source Sans 3', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Lexend', ui-sans-serif, system-ui, sans-serif;
+
+  /* Core identity — darkened for contrast compliance */
+  --color-navy: #0F172A;          /* 16.9:1 on white */
+  --color-navy-dark: #020617;
+  --color-navy-light: #334155;    /* 9.7:1 on white */
+  --color-saffron: #C2410C;       /* 5.9:1 on white — accessible replacement for #FF6B00 */
+  --color-saffron-bright: #EA580C;/* decorative / large text only */
+  --color-saffron-light: #F97316;
+  --color-saffron-pale: #FFF7ED;
+  --color-cta: #0369A1;           /* 6.4:1 — primary action blue */
+  --color-cta-hover: #075985;
+
+  /* Semantic status — all ≥4.5:1 on their pale backgrounds */
+  --color-success: #15803D;
+  --color-success-pale: #F0FDF4;
+  --color-warning: #B45309;
+  --color-warning-pale: #FFFBEB;
+  --color-danger: #B91C1C;
+  --color-danger-pale: #FEF2F2;
+  --color-info: #0369A1;
+  --color-info-pale: #F0F9FF;
+
+  --color-bg-main: #F8FAFC;
+  --color-text-main: #020617;
+  --color-text-muted: #475569;    /* 7.5:1 — replaces gray-400 for real text */
+
+  /* ── Semantic surface/content tokens ──────────────────────────
+     These are the ONLY colors components should reference for
+     backgrounds, text and borders. They flip wholesale in .dark,
+     so no component needs its own dark: variant to stay readable. */
+  --color-surface: #FFFFFF;       /* cards, navbar, modals */
+  --color-surface-2: #F1F5F9;     /* insets, table headers, chips */
+  --color-surface-3: #E2E8F0;     /* pressed / track backgrounds */
+  --color-border: #E2E8F0;
+  --color-border-strong: #CBD5E1;
+  --color-content: #0F172A;       /* primary text */
+  --color-content-2: #334155;     /* secondary text */
+  /* Muted labels. #64748B clears 4.5:1 on pure white but drops to 4.34:1
+     once it sits on --color-surface-2, which is where most of these labels
+     actually live. Darkened so it passes AA on every surface, not just one. */
+  --color-content-3: #4E5A6B;
+  --color-overlay: rgb(15 23 42 / 0.6);
+
+  /* Priority scale — read from JS for Leaflet markers, which render to
+     canvas/SVG and can't resolve CSS variables themselves. */
+  --color-priority-critical: #B91C1C;
+  --color-priority-high: #C2410C;
+  --color-priority-medium: #B45309;
+  --color-priority-low: #15803D;
+  --color-marker-user: #0369A1;
+
+  /* Chart palette — referenced from JS via getComputedStyle */
+  --color-chart-1: #0369A1;
+  --color-chart-2: #C2410C;
+  --color-chart-3: #15803D;
+  --color-chart-4: #7C3AED;
+  --color-chart-5: #B45309;
+  --color-chart-grid: #E2E8F0;
+  --color-chart-axis: #64748B;
+
+  /* ── Geometry scale ──────────────────────────────────────────
+     One radius ladder. Components reference these, never raw px,
+     so the product's "roundness" can be retuned in one place. */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
+
+  /* ── Spacing (4pt rhythm) ─────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* ── Motion ───────────────────────────────────────────────────
+     Durations follow the interaction/transition split: micro
+     feedback stays under ~200ms so it reads as instant; page-level
+     motion gets room to express spatial continuity. */
+  --dur-instant: 100ms;
+  --dur-fast: 160ms;
+  --dur-normal: 240ms;
+  --dur-slow: 360ms;
+  --dur-page: 480ms;
+  --dur-splash: 720ms;
+
+  /* Ease-out for entrances (decelerate into place), ease-in for
+     exits, spring for anything the user physically manipulates. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Elevation ────────────────────────────────────────────── */
+  --shadow-1: 0 1px 2px rgb(15 23 42 / 0.06), 0 1px 3px rgb(15 23 42 / 0.10);
+  --shadow-2: 0 2px 4px rgb(15 23 42 / 0.06), 0 4px 12px rgb(15 23 42 / 0.08);
+  --shadow-3: 0 4px 8px rgb(15 23 42 / 0.07), 0 12px 28px rgb(15 23 42 / 0.12);
+  --shadow-4: 0 8px 16px rgb(15 23 42 / 0.08), 0 24px 56px rgb(15 23 42 / 0.16);
+
+  /* ── z-index scale ────────────────────────────────────────── */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 20;
+  --z-nav: 30;
+  --z-dropdown: 40;
+  --z-overlay: 50;
+  --z-modal: 60;
+  --z-toast: 70;
+  --z-splash: 90;
+}
+
+/* Dark theme: override semantic tokens only. Never remap Tailwind's
+   palette (bg-white, gray-100, …) — doing that inverts utilities
+   silently and breaks any hardcoded text color sitting on top. */
+.dark {
+  --color-bg-main: #0A0F1D;
+  --color-text-main: #F1F5F9;
+  --color-text-muted: #94A3B8;
+
+  --color-surface: #111827;
+  --color-surface-2: #1E293B;
+  --color-surface-3: #334155;
+  --color-border: #1E293B;
+  --color-border-strong: #334155;
+  --color-content: #F1F5F9;
+  --color-content-2: #CBD5E1;
+  /* Lifted from #94A3B8, which fell to 4.04:1 on --color-surface-3.
+     #A3B1C2 clears AA on all three dark surfaces (8.1 / 6.7 / 4.75). */
+  --color-content-3: #A3B1C2;
+  --color-overlay: rgb(2 6 23 / 0.72);
+
+  --color-navy: #E2E8F0;
+  --color-saffron: #FB923C;       /* lightened for dark surfaces */
+  --color-saffron-pale: #2A1608;
+  --color-cta: #38BDF8;
+  --color-cta-hover: #7DD3FC;
+  --color-success: #4ADE80;
+  --color-success-pale: #052E16;
+  --color-warning: #FBBF24;
+  --color-warning-pale: #2A1D05;
+  --color-danger: #F87171;
+  --color-danger-pale: #2A0A0A;
+  --color-info: #38BDF8;
+  --color-info-pale: #082F49;
+
+  --color-chart-1: #38BDF8;
+  --color-chart-2: #FB923C;
+  --color-chart-3: #4ADE80;
+  --color-chart-4: #A78BFA;
+  --color-chart-5: #FBBF24;
+  --color-chart-grid: #1E293B;
+  --color-chart-axis: #94A3B8;
+
+  /* Priority colors brighten on dark so markers stay legible on the
+     inverted map tiles. */
+  --color-priority-critical: #F87171;
+  --color-priority-high: #FB923C;
+  --color-priority-medium: #FBBF24;
+  --color-priority-low: #4ADE80;
+  --color-marker-user: #38BDF8;
+
+  /* Dark surfaces need deeper, tighter shadows — the light-mode
+     values read as grey haze instead of elevation. */
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-2: 0 4px 14px rgb(0 0 0 / 0.55);
+  --shadow-3: 0 12px 34px rgb(0 0 0 / 0.62);
+  --shadow-4: 0 24px 64px rgb(0 0 0 / 0.7);
+}
+
+@layer base {
+  body {
+    @apply transition-colors duration-300;
+  }
+
+  /* Readable body text: 16px minimum, 1.6 line-height */
+  html { font-size: 16px; }
+  p, li, label, input, textarea, button { line-height: 1.6; }
+  h1, h2, h3, h4 { line-height: 1.25; letter-spacing: -0.01em; }
+
+  /* Visible focus rings everywhere — keyboard navigation requirement */
+  :focus-visible {
+    outline: 3px solid var(--color-cta);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  .dark :focus-visible { outline-color: #7DD3FC; }
+
+  /* Every interactive element gets a pointer + smooth transition */
+  button:not(:disabled), a, [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+    transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  button:disabled { cursor: not-allowed; }
+}
+
+body {
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
+  @apply font-sans;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Tells the browser to render native widgets (scrollbars, date pickers,
+   autofill, form controls) in the matching theme. */
+html { color-scheme: light; }
+html.dark { color-scheme: dark; }
+
+/* Chrome autofill repaints inputs bright yellow-white, which destroys
+   contrast in dark mode. Repaint it with the surface token instead. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-content);
+  -webkit-box-shadow: 0 0 0 1000px var(--color-surface) inset;
+  caret-color: var(--color-content);
+  transition: background-color 9999s ease-out 0s;
+}
+
+/* ── Semantic surface utilities ──────────────────────────────── */
+.surface { background-color: var(--color-surface); color: var(--color-content); }
+.surface-2 { background-color: var(--color-surface-2); color: var(--color-content); }
+.bordered { border: 1px solid var(--color-border); }
+.text-content { color: var(--color-content); }
+.text-content-2 { color: var(--color-content-2); }
+.text-content-3 { color: var(--color-content-3); }
+
+/* Screen-reader-only text that still receives focus */
+.sr-only-focusable:not(:focus):not(:focus-within) {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link — first tab stop for screen-reader / keyboard users */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1000;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-cta);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 0 0 0.75rem 0;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* Minimum 44x44 touch targets on coarse pointers */
+@media (pointer: coarse) {
+  button, a[role="button"], [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-content-3); }
+* { scrollbar-color: var(--color-border-strong) transparent; }
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+.animate-typing { animation: typingBounce 1.2s infinite ease-in-out; }
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface-3);
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+  animation: shimmer 1.6s infinite;
+}
+.dark .skeleton::after {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
+
+/* Respect the OS "reduce motion" setting — required for vestibular safety */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   PREMIUM LAYER — glass, glow, gradients, 3D depth
+   ══════════════════════════════════════════════════════════ */
+
+/* Glassmorphism surfaces.
+   Text color is set explicitly so anything nested inherits a readable
+   value in both themes without needing its own dark: variant. */
+.glass {
+  background: rgb(255 255 255 / 0.72);
+  color: var(--color-content);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-color: rgb(255 255 255 / 0.5);
+}
+.dark .glass {
+  background: rgb(17 24 39 / 0.62);
+  border-color: rgb(255 255 255 / 0.08);
+}
+
+.glass-strong {
+  background: rgb(255 255 255 / 0.92);
+  color: var(--color-content);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-color: rgb(255 255 255 / 0.6);
+}
+.dark .glass-strong {
+  background: rgb(17 24 39 / 0.92);
+  border-color: rgb(255 255 255 / 0.1);
+}
+
+/* Fallback for browsers without backdrop-filter (Firefox w/ flag off) —
+   without this the panels render near-transparent and text is unreadable. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass, .glass-strong { background: var(--color-surface); }
+}
+
+/* Ambient glow accents */
+.glow-saffron { box-shadow: 0 0 0 1px rgba(194,65,12,0.15), 0 8px 30px -8px rgba(194,65,12,0.45); }
+.glow-navy { box-shadow: 0 0 0 1px rgba(3,105,161,0.15), 0 8px 30px -8px rgba(3,105,161,0.45); }
+.dark .glow-saffron { box-shadow: 0 0 0 1px rgba(251,146,60,0.25), 0 8px 34px -6px rgba(251,146,60,0.5); }
+.dark .glow-navy { box-shadow: 0 0 0 1px rgba(56,189,248,0.25), 0 8px 34px -6px rgba(56,189,248,0.45); }
+
+/* Premium gradient text */
+.text-gradient-premium {
+  background: linear-gradient(135deg, #38BDF8 0%, #818CF8 45%, #FB923C 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Animated aurora background — decorative, GPU-cheap */
+.aurora-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.aurora-blob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(90px);
+  opacity: 0.35;
+  animation: auroraFloat 16s ease-in-out infinite;
+  will-change: transform;
+}
+@keyframes auroraFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(4%, 6%) scale(1.08); }
+  66% { transform: translate(-3%, -4%) scale(0.96); }
+}
+
+/* ── Elevation ──────────────────────────────────────────────── */
+.elev-1 { box-shadow: var(--shadow-1); }
+.elev-2 { box-shadow: var(--shadow-2); }
+.elev-3 { box-shadow: var(--shadow-3); }
+.elev-4 { box-shadow: var(--shadow-4); }
+
+/* Cards lift on hover, settle on press. Transform-only so no reflow.
+   Hover lift is skipped on touch devices, which have no hover state. */
+.lift {
+  transition: transform var(--dur-normal) var(--ease-out),
+              box-shadow var(--dur-normal) var(--ease-out);
+}
+@media (hover: hover) {
+  .lift:hover { transform: translateY(-2px); box-shadow: var(--shadow-3); }
+}
+.lift:active { transform: translateY(0) scale(0.995); }
+
+/* Kill the 300ms mobile tap delay on every interactive element. */
+button, a, [role="button"], label, input, select, textarea {
+  touch-action: manipulation;
+}
+
+/* ══════════════════════════════════════════════════════════
+   MICRO-INTERACTIONS
+   Every interactive surface acknowledges input within ~160ms.
+   ══════════════════════════════════════════════════════════ */
+
+/* Press feedback for anything not using the shared Button. */
+.press { transition: transform var(--dur-fast) var(--ease-out); }
+.press:active { transform: scale(0.96); }
+
+/* Inputs: the focus ring grows from the field rather than snapping on,
+   which reads as the field "waking up" instead of flashing. */
+.field {
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-normal) var(--ease-out),
+              background-color var(--dur-fast) var(--ease-out);
+}
+.field:focus-visible,
+.field:focus {
+  border-color: var(--color-cta);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-cta) 18%, transparent);
+}
+
+/* Nav items: an underline/indicator that slides in from the leading edge. */
+.nav-item { position: relative; transition: color var(--dur-fast) var(--ease-out); }
+.nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 20%; bottom: 20%;
+  width: 3px;
+  border-radius: var(--radius-full);
+  background: var(--color-cta);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform var(--dur-normal) var(--ease-spring);
+}
+.nav-item[aria-current="page"]::before,
+.nav-item.is-active::before { transform: scaleY(1); }
+
+/* Gradient border on hover — drawn with a mask so it doesn't
+   change layout or require a wrapper element. */
+.gradient-border {
+  position: relative;
+  isolation: isolate;
+}
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--color-cta), var(--color-saffron));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--dur-normal) var(--ease-out);
+  pointer-events: none;
+}
+.gradient-border:hover::after,
+.gradient-border:focus-within::after { opacity: 1; }
+
+/* Success / error state pulses — communicate the outcome, then stop. */
+@keyframes successPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.06); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.state-success { animation: successPop var(--dur-slow) var(--ease-spring) both; }
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+}
+.state-error { animation: errorShake var(--dur-slow) var(--ease-in-out) both; }
+
+/* Staggered list entrance — 40ms apart, capped so long lists
+   don't leave the last item waiting seconds to appear. */
+.stagger > * { animation: fadeUp var(--dur-normal) var(--ease-out) both; }
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 40ms; }
+.stagger > *:nth-child(3) { animation-delay: 80ms; }
+.stagger > *:nth-child(4) { animation-delay: 120ms; }
+.stagger > *:nth-child(5) { animation-delay: 160ms; }
+.stagger > *:nth-child(n+6) { animation-delay: 200ms; }
+
+/* Premium button sheen sweep on hover */
+.btn-sheen { position: relative; overflow: hidden; isolation: isolate; }
+.btn-sheen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.35) 45%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+.btn-sheen:hover::after { transform: translateX(120%); }
+
+/* 3D tilt card perspective wrapper */
+.tilt-wrap { perspective: 1200px; }
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.12s ease-out, box-shadow 0.3s ease;
+  will-change: transform;
+}
+.tilt-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.16), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.tilt-card:hover .tilt-shine { opacity: 1; }
+
+/* ══════════════════════════════════════════════════════════
+   3D LOADING SCENE
+   Only transform/opacity animate (never width/height/top/left),
+   so the whole scene stays on the compositor at 60fps.
+   ══════════════════════════════════════════════════════════ */
+
+.scene-3d {
+  perspective: 900px;
+  perspective-origin: 50% 45%;
+}
+
+.cube-3d {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  transform-style: preserve-3d;
+  animation: cubeSpin 9s linear infinite;
+  will-change: transform;
+}
+
+@keyframes cubeSpin {
+  from { transform: rotateX(-22deg) rotateY(0deg); }
+  to   { transform: rotateX(-22deg) rotateY(360deg); }
+}
+
+.cube-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--color-cta) 88%, transparent),
+    color-mix(in srgb, var(--color-saffron) 78%, transparent));
+  border: 1px solid rgb(255 255 255 / 0.28);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35);
+  color: #fff;
+  backface-visibility: visible;
+}
+
+/* Each face pushed out to half the cube's width (44px). */
+.cube-face.front  { transform: translateZ(44px); }
+.cube-face.back   { transform: rotateY(180deg) translateZ(44px); }
+.cube-face.right  { transform: rotateY(90deg)  translateZ(44px); }
+.cube-face.left   { transform: rotateY(-90deg) translateZ(44px); }
+.cube-face.top    { transform: rotateX(90deg)  translateZ(44px); }
+.cube-face.bottom { transform: rotateX(-90deg) translateZ(44px); }
+
+/* Contact shadow — sells the object as sitting in space. */
+.cube-shadow {
+  width: 96px;
+  height: 14px;
+  margin: 30px auto 0;
+  border-radius: 999px;
+  background: radial-gradient(ellipse at center, rgb(0 0 0 / 0.42), transparent 70%);
+  filter: blur(6px);
+  animation: shadowPulse 9s ease-in-out infinite;
+}
+@keyframes shadowPulse {
+  0%, 100% { transform: scaleX(1); opacity: 0.55; }
+  50%      { transform: scaleX(0.78); opacity: 0.32; }
+}
+
+/* Orbiting ring, tilted into the same 3D plane as the cube. */
+.orbit-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 190px;
+  height: 190px;
+  margin: -95px 0 0 -95px;
+  border-radius: 50%;
+  border: 1.5px dashed color-mix(in srgb, var(--color-cta) 45%, transparent);
+  transform: rotateX(74deg);
+  animation: ringSpin 14s linear infinite;
+}
+.orbit-ring.slow {
+  width: 250px; height: 250px; margin: -125px 0 0 -125px;
+  border-color: color-mix(in srgb, var(--color-saffron) 35%, transparent);
+  animation-duration: 22s;
+  animation-direction: reverse;
+}
+@keyframes ringSpin {
+  from { transform: rotateX(74deg) rotateZ(0deg); }
+  to   { transform: rotateX(74deg) rotateZ(360deg); }
+}
+
+/* Indeterminate progress bar — translate only, no width animation. */
+.progress-track {
+  position: relative;
+  width: 190px;
+  height: 4px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--color-surface-3);
+}
+.progress-track::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, var(--color-cta), var(--color-saffron), transparent);
+  transform: translateX(-100%);
+  animation: progressSweep 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes progressSweep {
+  to { transform: translateX(100%); }
+}
+
+/* Staggered fade-up for loading copy (30–50ms apart per the motion rules). */
+.fade-up { animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Dynamic lighting — a specular sweep across the cube faces, offset per
+   face so the highlight travels around the object as it rotates. */
+.cube-face::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 30%, rgb(255 255 255 / 0.45) 48%, transparent 62%);
+  opacity: 0;
+  animation: faceLight 9s var(--ease-in-out) infinite;
+}
+.cube-face.right::after  { animation-delay: -1.5s; }
+.cube-face.back::after   { animation-delay: -3s; }
+.cube-face.left::after   { animation-delay: -4.5s; }
+.cube-face.top::after    { animation-delay: -6s; }
+.cube-face.bottom::after { animation-delay: -7.5s; }
+@keyframes faceLight {
+  0%, 70%, 100% { opacity: 0; }
+  20%, 35% { opacity: 1; }
+}
+
+/* Particle field. Positions are set inline from a seeded generator so the
+   layout is deterministic (no hydration/render mismatch) while still
+   looking organic. Drift is transform-only. */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--color-cta);
+  opacity: 0;
+  animation: particleDrift var(--p-dur, 14s) var(--ease-in-out) var(--p-delay, 0s) infinite;
+  will-change: transform, opacity;
+}
+@keyframes particleDrift {
+  0%   { transform: translate3d(0, 12px, 0) scale(0.6); opacity: 0; }
+  15%  { opacity: var(--p-opacity, 0.5); }
+  85%  { opacity: var(--p-opacity, 0.5); }
+  100% { transform: translate3d(var(--p-dx, 14px), -56px, 0) scale(1); opacity: 0; }
+}
+
+/* Glass shards floating at different depths — the parallax layer.
+   --px/--py are written by the pointer handler (rAF-throttled). */
+.glass-shard {
+  position: absolute;
+  border-radius: var(--radius-lg);
+  background: rgb(255 255 255 / 0.07);
+  border: 1px solid rgb(255 255 255 / 0.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transform: translate3d(
+    calc(var(--px, 0) * var(--depth, 1) * 1px),
+    calc(var(--py, 0) * var(--depth, 1) * 1px),
+    0
+  ) rotate(var(--rot, 0deg));
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+/* Splash exit — scales up and fades as the app fades in underneath,
+   so the handoff reads as one continuous move rather than a cut. */
+.splash-exit {
+  animation: splashOut var(--dur-splash) var(--ease-in-out) forwards;
+  pointer-events: none;
+}
+@keyframes splashOut {
+  to { opacity: 0; transform: scale(1.06); filter: blur(6px); }
+}
+
+/* Vestibular safety: freeze the scene at a readable angle rather than
+   just speeding it up, so it reads as a deliberate static illustration. */
+@media (prefers-reduced-motion: reduce) {
+  .cube-3d { animation: none !important; transform: rotateX(-22deg) rotateY(-38deg); }
+  .orbit-ring, .cube-shadow, .progress-track::after, .fade-up,
+  .particle, .cube-face::after, .stagger > * { animation: none !important; }
+  .particle { opacity: 0.35; }
+  .glass-shard { transform: none !important; transition: none; }
+  .progress-track::after { transform: none; opacity: 0.85; }
+  .splash-exit { animation: none; opacity: 0; }
+}
+
+/* Floating micro-interaction for hero/decorative icons */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px) rotateZ(0deg); }
+  50% { transform: translateY(-8px) rotateZ(2deg); }
+}
+.float-y { animation: floatY 5s ease-in-out infinite; }
+
+/* Dark, premium map tiles — filter trick avoids needing a separate tile server */
+.map-dark .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.92) saturate(0.85);
+}
+.map-dark .leaflet-container { background: #0b1120; }
+.map-premium .leaflet-control-zoom {
+  border: none !important;
+  border-radius: 14px !important;
+  overflow: hidden;
+  box-shadow: 0 8px 24px -4px rgba(0,0,0,0.35) !important;
+}
+.map-premium .leaflet-control-zoom a {
+  background: rgba(15, 23, 42, 0.85) !important;
+  color: #F8FAFC !important;
+  border: none !important;
+  backdrop-filter: blur(8px);
+}
+.map-premium .leaflet-control-zoom a:hover { background: #0369A1 !important; }
+.map-premium .leaflet-popup-content-wrapper {
+  border-radius: 16px;
+  box-shadow: 0 12px 32px -8px rgba(0,0,0,0.35);
+}
+.map-premium .leaflet-popup-tip { box-shadow: 0 4px 10px -2px rgba(0,0,0,0.2); }
