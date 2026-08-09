@@ -1,9 +1,7 @@
 -- ═══════════════════════════════════════════════════════════════════════
--- CivicAI — schema
---
--- Portable PostgreSQL 14+. Runs unchanged on Supabase, Neon, or plain PG.
--- Supabase-only concerns (RLS policies, storage buckets, realtime) live in
--- 002_rls.sql so this file stays provider-neutral.
+-- CivicAI — Schema (PostgreSQL 14+)
+-- Portable schema supporting Neon Serverless Postgres and PGlite.
+-- ═══════════════════════════════════════════════════════════════════════
 --
 -- Conventions applied to every domain table:
 --   id          UUID primary key (gen_random_uuid, built in since PG13)
