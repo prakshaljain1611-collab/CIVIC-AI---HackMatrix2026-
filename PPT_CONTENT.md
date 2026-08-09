@@ -5,6 +5,7 @@
 ## Slide 1: Title & Team
 - **Title**: CivicAI — Jansunwai Portal 2.0
 - **Subtitle**: AI-Powered Public Grievance Redressal & SLA Enforcement System
+- **Live Demo Link**: [https://civic-ai-hack-matrix2026.vercel.app](https://civic-ai-hack-matrix2026.vercel.app)
 - **Team Name**: Team CivicAI
 - **Event**: HackMatrix 2K26 (IEEE Computer Society SBC, MITS Gwalior)
 

@@ -9,7 +9,7 @@
 > *"Good morning judges! Every day, millions of citizens file grievances on public portals. But manual triaging creates massive backlogs, wrong department routing, and missed SLA deadlines. Today we present **CivicAI: Jansunwai Portal 2.0**."*
 
 ## 🕒 Minute 1:00 – 2:30 | Citizen Intake & Passwordless Auth
-1. **Show Citizen Portal**: Open `http://localhost:3000`.
+1. **Show Citizen Portal**: Open [https://civic-ai-hack-matrix2026.vercel.app](https://civic-ai-hack-matrix2026.vercel.app) (or local `http://localhost:3000`).
 2. **Demonstrate OTP Sign-In**: Enter phone number, click send. Show how the dev banner displays code `905869` with the **"Use this code"** auto-fill button.
 3. **Conversational Intake**: Type *"Water pipeline burst on MG Road near Sector 18"*.
 4. **Point out AI Output**: Show how Gemini automatically categorizes it under **Water Supply**, marks priority as **High**, extracts **Sector 18**, and drops a pinpoint pin on the GIS map!

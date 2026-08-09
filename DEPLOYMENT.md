@@ -1,5 +1,8 @@
 # 🚢 Production Deployment Guide — CivicAI
 
+## 🌐 Live Application URL
+- **Production URL**: [https://civic-ai-hack-matrix2026.vercel.app](https://civic-ai-hack-matrix2026.vercel.app)
+
 ## ☁️ Option 1: Vercel Deployment (Recommended)
 1. Push repository to GitHub.
 2. Import project into Vercel dashboard.

@@ -34,8 +34,9 @@ Public grievance redressal portals (such as Jansunwai) handle thousands of citiz
 ---
 
 ## 🔗 Links
-- **PPT Presentation**: [View Presentation Deck](https://example.com/civicai-ppt) *(Insert link here)*
-- **Live Demonstration**: [Watch Live Demo Video](https://example.com/civicai-demo) *(Insert link here)*
+- **Live Deployment Application**: [https://civic-ai-hack-matrix2026.vercel.app](https://civic-ai-hack-matrix2026.vercel.app)
+- **Live Demonstration Portal**: [https://civic-ai-hack-matrix2026.vercel.app](https://civic-ai-hack-matrix2026.vercel.app)
+- **PPT Presentation**: [View Presentation Deck](https://example.com/civicai-ppt) *(Insert presentation link if applicable)*
 
 ---
 
