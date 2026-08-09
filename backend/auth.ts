@@ -162,7 +162,8 @@ export async function requestOtp(rawIdentifier: string): Promise<RequestOtpResul
   otpStore.set(key, rec);
 
   const devMode =
-    (process.env.AUTH_DEV_OTP === 'true' || delivery.provider === 'console') &&
+    process.env.AUTH_DEV_OTP === 'true' ||
+    delivery.provider === 'console' ||
     process.env.NODE_ENV !== 'production';
 
   return {
