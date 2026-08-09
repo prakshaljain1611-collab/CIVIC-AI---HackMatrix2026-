@@ -6,10 +6,10 @@ import { tokenFromRequest, safeEqual } from './security.js';
 // ───────────────────────── config ─────────────────────────
 export const AUTH_LIMITS = {
   OTP_TTL_MS: 5 * 60_000,          // OTP valid 5 minutes
-  MAX_VERIFY_ATTEMPTS: 6,          // wrong-OTP tries before the code is burned
-  MAX_OTP_REQUESTS: 5,             // OTP sends per identifier per window
+  MAX_VERIFY_ATTEMPTS: 15,         // wrong-OTP tries before code is burned
+  MAX_OTP_REQUESTS: 50,            // OTP sends per identifier per window
   OTP_REQUEST_WINDOW_MS: 15 * 60_000,
-  RESEND_COOLDOWN_MS: 30_000,      // must wait between sends
+  RESEND_COOLDOWN_MS: 5_000,       // 5s cooldown between sends for responsive demo
   LOCKOUT_MS: 15 * 60_000,         // lockout after exhausting attempts
   SESSION_TTL_MS: 60 * 60_000,     // session valid 1 hour
   SESSION_ABSOLUTE_TTL_MS: 12 * 60 * 60_000, // hard cap regardless of refreshes
