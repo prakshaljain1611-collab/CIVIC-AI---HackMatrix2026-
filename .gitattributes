@@ -1,0 +1,18 @@
+# ─── GitHub Linguist Language Stats Configuration ───
+# Exclude generated/vendor/research/translation files from language calculations
+
+# Ignore historical research prototypes from repo language stats
+research/** linguist-vendored=true
+
+# Ignore large translation dictionaries
+frontend/src/i18n/strings.ts linguist-vendored=true
+
+# Force SQL files to count towards SQL stats
+database/*.sql linguist-language=SQL
+
+# Force documentation files
+*.md linguist-documentation=true
+docs/*.md linguist-documentation=true
+
+# (Optional) Treat backend files as JavaScript if you prefer JS over TS stats
+# backend/*.ts linguist-language=JavaScript
