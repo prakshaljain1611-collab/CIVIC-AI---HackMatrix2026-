@@ -9,7 +9,7 @@
 **CivicAI: Jansunwai Portal 2.0**
 
 ## 👥 Team Name
-**Team CivicAI**
+**Team QUAD BRAINS**
 
 ---
 
