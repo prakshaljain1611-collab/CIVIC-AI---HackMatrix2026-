@@ -17,6 +17,7 @@
 - **GitHub Repository**: [https://github.com/prakshaljain1611-collab/CIVIC-AI---HackMatrix2026-](https://github.com/prakshaljain1611-collab/CIVIC-AI---HackMatrix2026-)
 - **Live Deployment**: [https://civic-ai-hack-matrix2026.vercel.app/](https://civic-ai-hack-matrix2026.vercel.app/)
 - **Demo Video**: [https://drive.google.com/file/d/1VyY7EL__NBuKKwnK8mbkfQ-vxX-mQgmh/view?usp=sharing](https://drive.google.com/file/d/1VyY7EL__NBuKKwnK8mbkfQ-vxX-mQgmh/view?usp=sharing)
+- **Official Documentation PDF**: [https://drive.google.com/file/d/1LnyN-NShJ19KT_DjBMfQZPeOpzHZHtFU/view?usp=sharing](https://drive.google.com/file/d/1LnyN-NShJ19KT_DjBMfQZPeOpzHZHtFU/view?usp=sharing)
 
 ---
 

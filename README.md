@@ -23,11 +23,12 @@
 
 [![Live Demo](https://img.shields.io/badge/▶%20Live%20Demo-Open%20App-10b981?style=for-the-badge&logo=vercel&logoColor=white)](https://civic-ai-hack-matrix2026.vercel.app/)
 [![Demo Video](https://img.shields.io/badge/🎥%20Demo%20Video-Watch-red?style=for-the-badge&logo=google-drive&logoColor=white)](https://drive.google.com/file/d/1VyY7EL__NBuKKwnK8mbkfQ-vxX-mQgmh/view?usp=sharing)
+[![Documentation PDF](https://img.shields.io/badge/📄%20Documentation-PDF-4285F4?style=for-the-badge&logo=google-drive&logoColor=white)](https://drive.google.com/file/d/1LnyN-NShJ19KT_DjBMfQZPeOpzHZHtFU/view?usp=sharing)
 [![GitHub Repo](https://img.shields.io/badge/🐙%20GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/prakshaljain1611-collab/CIVIC-AI---HackMatrix2026-)
 
 <br/>
 
-[**📄 Full Solution Document**](PROJECT_DOCUMENTATION.md) · [**🔄 User Flow**](USER_FLOW.md) · [**💻 Tech Stack**](TECH_STACK.md) · [**📋 PRD**](PRD.md) · [**🎨 UI Guidelines**](UI_GUIDELINES.md)
+[**📄 Full Solution Document (Markdown)**](PROJECT_DOCUMENTATION.md) · [**📑 Official Documentation PDF**](https://drive.google.com/file/d/1LnyN-NShJ19KT_DjBMfQZPeOpzHZHtFU/view?usp=sharing) · [**🔄 User Flow**](USER_FLOW.md) · [**💻 Tech Stack**](TECH_STACK.md) · [**📋 PRD**](PRD.md)
 
 </div>
 
