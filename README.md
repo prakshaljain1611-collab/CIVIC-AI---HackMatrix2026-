@@ -6,37 +6,36 @@
 ---
 
 ## 📌 Project Title
-**CivicAI: Jansunwai Portal 2.0**
+**CivicAI: Intelligent Citizen Grievance & Accountability Platform**
 
-## 👥 Team Name
-**Team QUAD BRAINS**
+## 👥 Team Details
+- **Event**: HackMatrix 2026 – Round 2
+- **Team Name**: Quad Brains
+- **Team Leader**: Himani Rishi
+- **Full Project Documentation**: 📄 [PROJECT_DOCUMENTATION.md](file:///Users/himanshusingh/Downloads/CIVI-AI-PRJ-main/PROJECT_DOCUMENTATION.md)
+
+---
+
+## 🔗 Official Submission Links
+- **GitHub Repository**: [https://github.com/prakshaljain1611-collab/CIVIC-AI---HackMatrix2026-](https://github.com/prakshaljain1611-collab/CIVIC-AI---HackMatrix2026-)
+- **Live Deployment**: [https://civic-ai-hack-matrix2026.vercel.app/](https://civic-ai-hack-matrix2026.vercel.app/)
+- **Demo Video**: [https://drive.google.com/file/d/1VyY7EL__NBuKKwnK8mbkfQ-vxX-mQgmh/view?usp=sharing](https://drive.google.com/file/d/1VyY7EL__NBuKKwnK8mbkfQ-vxX-mQgmh/view?usp=sharing)
 
 ---
 
 ## 🚨 Problem Statement
-Public grievance redressal portals (such as Jansunwai) handle thousands of citizen complaints daily. Traditional systems suffer from critical bottlenecks:
-- **Delayed Processing & Backlogs**: Manual routing of complaints leads to slow processing, missed SLAs, and citizen frustration.
-- **Misclassified & Spam Complaints**: Lack of automated triaging results in improper department assignment and resource waste.
-- **Lack of Transparency**: Citizens lack real-time visibility into complaint status, SLA deadlines, and resolution progress.
-- **Administrative Burden**: Department officials lack automated tools for priority sorting, response generation, and breach warnings.
+Citizens often face friction when reporting civic issues: they may not know the correct department, complaints can be difficult to track after submission, duplicate reports can overload staff, and delayed cases can remain unresolved without clear accountability. CivicAI addresses this gap by providing a single, AI-assisted entry point for reporting, classifying, routing, tracking and resolving civic grievances.
 
 ---
 
 ## 💡 Solution Overview
-**CivicAI (Jansunwai Portal 2.0)** transforms public administration with an end-to-end, AI-enhanced grievance management ecosystem:
+**CivicAI (Jansunwai Portal 2.0)** connects a citizen-facing conversational interface with an administrative resolution workflow:
 
 1. **Intelligent Complaint Triaging**: Automatically categorizes grievances, assigns priority scores, and routes complaints to the responsible department using Google Gemini API & Claude fallback.
-2. **Real-time SLA Tracking & Breach Sweeper**: Automated background worker sweeps active complaints, flags approaching/breached SLAs, and alerts department officials.
+2. **Real-time SLA Tracking & Escalation**: Automated background worker sweeps active complaints, flags approaching/breached SLAs, and alerts department officials.
 3. **Multi-Channel Passwordless Authentication**: Citizen-friendly authentication supporting Google Sign-In and Phone/SMS OTP verification with anti-bot honeypot protection.
 4. **Interactive Citizen & Officer Portals**: High-performance dashboard with interactive GIS mapping, complaint heatmaps, status updates, and automated response template generation.
 5. **Durable Storage & Security**: Enterprise-grade security featuring rate-limiting, timing-safe OTP verification, RBAC permissions, and optional Neon Serverless Postgres persistence.
-
----
-
-## 🔗 Links
-- **Live Deployment Application**: [https://civic-ai-hack-matrix2026.vercel.app](https://civic-ai-hack-matrix2026.vercel.app)
-- **Live Demonstration Portal**: [https://civic-ai-hack-matrix2026.vercel.app](https://civic-ai-hack-matrix2026.vercel.app)
-- **PPT Presentation**: [View Presentation Deck](https://example.com/civicai-ppt) *(Insert presentation link if applicable)*
 
 ---
 
