@@ -22,7 +22,7 @@
 <br/>
 
 [![Live Demo](https://img.shields.io/badge/▶%20Live%20Demo-Open%20App-10b981?style=for-the-badge&logo=vercel&logoColor=white)](https://civic-ai-hack-matrix2026.vercel.app/)
-[![Demo Video](https://img.shields.io/badge/🎥%20Demo%20Video-Watch-red?style=for-the-badge&logo=google-drive&logoColor=white)](https://drive.google.com/file/d/1VyY7EL__NBuKKwnK8mbkfQ-vxX-mQgmh/view?usp=sharing)
+[![Demo Video](https://img.shields.io/badge/🎥%20Demo%20Video-Watch-red?style=for-the-badge&logo=google-drive&logoColor=white)](https://drive.google.com/file/d/1VvY7EL__NBuKKwnK8mbkfQ-vxX-mQgmh/view?usp=sharing)
 [![GitHub Repo](https://img.shields.io/badge/🐙%20GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/prakshaljain1611-collab/CIVIC-AI---HackMatrix2026-)
 
 <br/>
