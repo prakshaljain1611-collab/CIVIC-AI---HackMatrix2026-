@@ -23,12 +23,11 @@
 
 [![Live Demo](https://img.shields.io/badge/▶%20Live%20Demo-Open%20App-10b981?style=for-the-badge&logo=vercel&logoColor=white)](https://civic-ai-hack-matrix2026.vercel.app/)
 [![Demo Video](https://img.shields.io/badge/🎥%20Demo%20Video-Watch-red?style=for-the-badge&logo=google-drive&logoColor=white)](https://drive.google.com/file/d/1VyY7EL__NBuKKwnK8mbkfQ-vxX-mQgmh/view?usp=sharing)
-[![Documentation PDF](https://img.shields.io/badge/📄%20Documentation-PDF-4285F4?style=for-the-badge&logo=google-drive&logoColor=white)](https://drive.google.com/file/d/1LnyN-NShJ19KT_DjBMfQZPeOpzHZHtFU/view?usp=sharing)
 [![GitHub Repo](https://img.shields.io/badge/🐙%20GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/prakshaljain1611-collab/CIVIC-AI---HackMatrix2026-)
 
 <br/>
 
-[**📄 Full Solution Document (Markdown)**](PROJECT_DOCUMENTATION.md) · [**📑 Official Documentation PDF**](https://drive.google.com/file/d/1LnyN-NShJ19KT_DjBMfQZPeOpzHZHtFU/view?usp=sharing) · [**🔄 User Flow**](USER_FLOW.md) · [**💻 Tech Stack**](TECH_STACK.md) · [**📋 PRD**](PRD.md)
+[**📄 Full Solution Document**](PROJECT_DOCUMENTATION.md) · [**🔄 User Flow**](USER_FLOW.md) · [**💻 Tech Stack**](TECH_STACK.md) · [**📋 PRD**](PRD.md) · [**🎨 UI Guidelines**](UI_GUIDELINES.md)
 
 </div>
 
@@ -48,13 +47,13 @@
 
 CivicAI transforms operational performance across municipal departments:
 
-| Metric | Traditional Portal (Jansunwai) | 🟢 CivicAI (Ours) | Improvement |
-| :--- | :---: | :---: | :---: |
-| **Intake & Triage Time** | 24 - 48 Hours | **< 2 Seconds** | **99.9% Faster** |
-| **Department Routing Accuracy** | ~ 65% (Manual) | **> 94% (AI Enriched)** | **+29% Accuracy** |
-| **SLA Breach Monitoring** | Manual Audit (Periodic) | **Real-time Automated Sweeper** | **100% Zero Missed Alerts** |
-| **Closure Verification** | Closed by Officer unilaterally | **Citizen-Controlled Verification** | **Zero False Closures** |
-| **Multilingual Accessibility** | English / Hindi only | **12 Languages + RTL Urdu** | **Universal Coverage** |
+| Metric                          | Traditional Portal (Jansunwai) |          🟢 CivicAI (Ours)          |         Improvement         |
+| :------------------------------ | :----------------------------: | :---------------------------------: | :-------------------------: |
+| **Intake & Triage Time**        |         24 - 48 Hours          |           **< 2 Seconds**           |      **99.9% Faster**       |
+| **Department Routing Accuracy** |         ~ 65% (Manual)         |       **> 94% (AI Enriched)**       |      **+29% Accuracy**      |
+| **SLA Breach Monitoring**       |    Manual Audit (Periodic)     |   **Real-time Automated Sweeper**   | **100% Zero Missed Alerts** |
+| **Closure Verification**        | Closed by Officer unilaterally | **Citizen-Controlled Verification** |   **Zero False Closures**   |
+| **Multilingual Accessibility**  |      English / Hindi only      |     **12 Languages + RTL Urdu**     |   **Universal Coverage**    |
 
 ---
 
@@ -78,64 +77,71 @@ CivicAI transforms operational performance across municipal departments:
 
 ## ✨ Key Features
 
-* 🤖 **Conversational AI Intake**: AI-assisted complaint understanding with structured JSON outputs and safe static fallbacks.
-* 🌐 **12-Language Support**: Native-script interface support including English, Hindi, Tamil, Telugu, Marathi, Bengali, and RTL Urdu.
-* 📱 **Passwordless OTP Authentication**: Frictionless login via email or Indian mobile number with anti-bot honeypots.
-* 🗺️ **Location-Aware Reporting**: GIS map integration (Leaflet/React-Leaflet) with landmark and sector resolution.
-* 🛡️ **Role-Based Access Control (RBAC)**: Multi-tiered access for Citizens, Field Officers, Department Heads, and Super Admins.
-* ⚡ **Real-Time Updates**: Server-Sent Events (SSE) push live complaint status changes directly to the UI.
-* 🔍 **Explainable Duplicate Engine**: Multi-signal scoring prevents duplicate backlogs without blindly merging separate issues.
-* 🔒 **Append-Only Audit Trail**: Hash-linked event logging for complete administrative accountability.
+- 🤖 **Conversational AI Intake**: AI-assisted complaint understanding with structured JSON outputs and safe static fallbacks.
+- 🌐 **12-Language Support**: Native-script interface support including English, Hindi, Tamil, Telugu, Marathi, Bengali, and RTL Urdu.
+- 📱 **Passwordless OTP Authentication**: Frictionless login via email or Indian mobile number with anti-bot honeypots.
+- 🗺️ **Location-Aware Reporting**: GIS map integration (Leaflet/React-Leaflet) with landmark and sector resolution.
+- 🛡️ **Role-Based Access Control (RBAC)**: Multi-tiered access for Citizens, Field Officers, Department Heads, and Super Admins.
+- ⚡ **Real-Time Updates**: Server-Sent Events (SSE) push live complaint status changes directly to the UI.
+- 🔍 **Explainable Duplicate Engine**: Multi-signal scoring prevents duplicate backlogs without blindly merging separate issues.
+- 🔒 **Append-Only Audit Trail**: Hash-linked event logging for complete administrative accountability.
 
 ---
 
 ## 🛠️ Technology Stack
 
-| Layer | Implementation |
-| :--- | :--- |
-| **Frontend** | React 19 • TypeScript (`~5.8`) • Vite (`^6.2`) • Tailwind CSS v4 • Framer Motion • Lucide React |
-| **Maps & Analytics** | Leaflet / React-Leaflet • Recharts • WebGL Shader (`OGL`) |
-| **Backend API** | Node.js • Express (`^4.21`) • TypeScript (`tsx`) |
-| **AI Layer** | Google Gemini 3.1 Flash Lite (`@google/genai`) • Anthropic Claude Fallback • Static Fallback |
-| **Database & Storage** | Serverless PostgreSQL (`@neondatabase/serverless`) • PGlite (In-memory dev DB) |
-| **Security & Auth** | Google OAuth 2.0 • MSG91 / Twilio SMS OTP • CSRF Protection • Timing-Safe Hashing • Rate Limiting |
-| **Deployment** | Vercel Live Deployment |
+| Layer                  | Implementation                                                                                    |
+| :--------------------- | :------------------------------------------------------------------------------------------------ |
+| **Frontend**           | React 19 • TypeScript (`~5.8`) • Vite (`^6.2`) • Tailwind CSS v4 • Framer Motion • Lucide React   |
+| **Maps & Analytics**   | Leaflet / React-Leaflet • Recharts • WebGL Shader (`OGL`)                                         |
+| **Backend API**        | Node.js • Express (`^4.21`) • TypeScript (`tsx`)                                                  |
+| **AI Layer**           | Google Gemini 3.1 Flash Lite (`@google/genai`) • Anthropic Claude Fallback • Static Fallback      |
+| **Database & Storage** | Serverless PostgreSQL (`@neondatabase/serverless`) • PGlite (In-memory dev DB)                    |
+| **Security & Auth**    | Google OAuth 2.0 • MSG91 / Twilio SMS OTP • CSRF Protection • Timing-Safe Hashing • Rate Limiting |
+| **Deployment**         | Vercel Live Deployment                                                                            |
 
 ---
 
 ## 🛡️ Security & Governance
 
-* **AI Key Isolation**: API keys remain strictly server-side and are never exposed to the client.
-* **Failure Ladder**: Graceful degradation from Gemini → Claude Failover → Rule-based Static Fallback.
-* **Authentication Safeguards**: Hashed OTP storage with timing-safe comparison and strict attempt window limits.
-* **Privacy-Aware Transparency**: Public feeds expose complaint progress while redacting citizen contact info.
-* **Accessibility Compliance**: Built following WCAG AAA guidelines, visible keyboard focus rings, and screen-reader semantics.
+- **AI Key Isolation**: API keys remain strictly server-side and are never exposed to the client.
+- **Failure Ladder**: Graceful degradation from Gemini → Claude Failover → Rule-based Static Fallback.
+- **Authentication Safeguards**: Hashed OTP storage with timing-safe comparison and strict attempt window limits.
+- **Privacy-Aware Transparency**: Public feeds expose complaint progress while redacting citizen contact info.
+- **Accessibility Compliance**: Built following WCAG AAA guidelines, visible keyboard focus rings, and screen-reader semantics.
 
 ---
 
 ## 🚀 Quickstart
 
 ### Prerequisites
-* **Node.js**: `v18.x` or higher
-* **npm**: `v9.x` or higher
+
+- **Node.js**: `v18.x` or higher
+- **npm**: `v9.x` or higher
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/prakshaljain1611-collab/CIVIC-AI---HackMatrix2026-.git
 cd CIVIC-AI---HackMatrix2026-
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 npm install
 ```
 
 ### 3. Environment Setup
+
 Copy the example environment file and configure your credentials:
+
 ```bash
 cp .env.example .env
 ```
+
 Key configuration parameters:
+
 ```env
 PORT=8787
 AI_API_KEY=your_google_gemini_api_key
@@ -143,10 +149,13 @@ AUTH_DEV_OTP=true
 ```
 
 ### 4. Run Locally
+
 Start both backend API server and frontend Vite dev server concurrently:
+
 ```bash
 npm run dev
 ```
+
 Open **`http://localhost:3000`** in your browser.
 
 ---
@@ -169,12 +178,12 @@ Open **`http://localhost:3000`** in your browser.
 
 ## 👥 Team & Work Division
 
-| Team Member | Module Scope | Primary Responsibilities |
-| :--- | :--- | :--- |
-| **Himani Rishi** *(Leader)* | **Full-Stack & Governance** | System architecture, submission documentation, SLA workflow |
-| **Member 2** | **Frontend Engineer** | React 19 UI components, GIS map integration, responsive dashboard |
-| **Member 3** | **Backend & AI Engineer** | Express REST endpoints, Gemini 3.1 Flash triage logic, fallback ladder |
-| **Member 4** | **Database & Security** | PostgreSQL schema, RBAC permissions, timing-safe auth & rate limiting |
+| Team Member                 | Module Scope                | Primary Responsibilities                                               |
+| :-------------------------- | :-------------------------- | :--------------------------------------------------------------------- |
+| **Himani Rishi** _(Leader)_ | **Full-Stack & Governance** | System architecture, submission documentation, SLA workflow            |
+| **Himanshu Singh**          | **Frontend Engineer**       | React 19 UI components, GIS map integration, responsive dashboard      |
+| **Priyanshu Srivastav**     | **Backend & AI Engineer**   | Express REST endpoints, Gemini 3.1 Flash triage logic, fallback ladder |
+| **Prakshal Jain**           | **Database & Security**     | PostgreSQL schema, RBAC permissions, timing-safe auth & rate limiting  |
 
 ---
 
